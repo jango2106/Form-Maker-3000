@@ -1,0 +1,82 @@
+{
+    "address": "test.php",
+    "method":"post",
+    "items":[
+        {
+            "supertype":"text",
+            "type":"text",
+            "name":"firstname",
+            "id":"firstname",
+            "placeholder":"John",
+            "label":"First Name:"
+        },
+        {
+            "supertype":"text",
+            "type":"text",
+            "name":"lastname",
+            "id":"lastname",
+            "placeholder":"Smith",
+            "label":"Last Name:"
+        },
+        {
+            "supertype":"choice",
+            "type":"radio",
+            "label": "Gender:",
+            "name":"gender",
+            "options":[
+                {
+                    "value": "male",
+                    "label": "Male"
+                },
+                {
+                    "value": "female",
+                    "label": "Female"  
+                },
+                {
+                    "value": "other",
+                    "label": "Other"
+                }
+            ]
+        },
+        {
+            "supertype":"text",
+            "type":"text",
+            "name":"username",
+            "id":"username",
+            "placeholder": "Username",
+            "label": "Username:"
+        },
+        {
+            "supertype":"text",
+            "type":"password",
+            "name":"pwrd",
+            "id":"pwrd",
+            "placeholder": "Password",
+            "label": "Password:"
+        },
+        {
+            "supertype":"text",
+            "type":"email",
+            "name":"email",
+            "id":"email",
+            "placeholder": "Eamil",
+            "label": "Email:"
+        },
+        {
+            "supertype":"text",
+            "type":"date",
+            "name":"date",
+            "id":"date",
+            "placeholder": "",
+            "label": "Date:"
+        },
+        {
+            "supertype":"text",
+            "type":"datetime-local",
+            "name":"datetime",
+            "id":"datetime",
+            "placeholder": "",
+            "label": "DateTime:"
+        }
+    ]
+}

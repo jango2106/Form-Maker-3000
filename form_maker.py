@@ -1,29 +1,30 @@
-import os
+"""A module to generate html forms from json file.
+
+"""
+
 import json
 
-def generate_form(fileName):
+
+def generate_form(file_name):
     """The main function for the formMaker program
 
-    value: list: values to be used in program
+    file_name: string: the name of the json file to be imported
     """
-    json = __load_file(fileName)
+    f_json = __load_file(file_name)
 
     output = ""
     output += "<html>\n<body>\n<h1>Autogen Form</h1>\n"
 
-    if(json["address"] is not "" and json["method"] is not ""):
-        output += '<form action="' + json["address"] + '" method="' + json["method"] + '">\n'
+    if(f_json["address"] is not str() and f_json["method"] is not str()):
+        output += '<form action="' + f_json["address"] + '" method="' + f_json["method"] + '">\n'
     else:
         output += "<form>"
-    
     output += "<fieldset>"
-    
-    if(json["items"] is not []):
-        for element in json["items"]:
-            output += generate_HTML(element)
-    
+    if f_json["items"] is not list():
+        for element in f_json["items"]:
+            output += generate_html(element)
+
     output += "</fieldset>"
-    
     output += '<input type="submit" value="Submit">\n'
     output += "</form>\n</body>\n</html>"
 
@@ -34,16 +35,26 @@ def generate_form(fileName):
     file.write(output)
     file.close()
 
+
 def __load_file(file_name):
-    """
+    """Loads a json file
+
     """
     read_in = open(file_name, 'r')
     return json.load(read_in)
 
+
 def __generate_label(text):
+    """Generates a label with a given text as the innerHTML
+
+    """
     return "<label>" + text + "</label>\n"
 
+
 def __generate_input_type(value, attr_list, attr_vals):
+    """Generates an input tag based on given information
+
+    """
     output = '<input type="' + value + '"'
     for i in range(len(attr_list)):
         output += __generate_input_attr(attr_list[i], attr_vals[i])
@@ -52,14 +63,23 @@ def __generate_input_type(value, attr_list, attr_vals):
 
     return output
 
+
 def __generate_input_attr(name, value):
+    """Generates an html tag attribute and value
+
+    """
     return name + '="' + value + '" '
 
+
 def __generate_break():
+    """Creates a html break tag
+
+    """
     return "<br>"
 
-def generate_HTML(element):
-    """
+
+def generate_html(element):
+    """Generates html based on type
 
     """
     type_of = element["supertype"]
@@ -71,28 +91,36 @@ def generate_HTML(element):
 
     return ""
 
+
 def generate_text_type(element):
+    """Generates text based non-choice input items
+
+    """
     output = __generate_label(element["label"])
     attributes = element["attributes"]
     keys = list()
     for key in attributes.keys():
         keys.append(key)
-    
+
     values = list()
     for key in keys:
         values.append(attributes[key])
-    
+
     output += __generate_input_type(
         element["type"],
         keys,
         values
-        )
-    
+    )
+
     output += __generate_break()
 
     return output
 
+
 def generate_radio(element):
+    """Generates radio button inputs
+
+    """
     output = __generate_label(element["label"]) + __generate_break()
     output += "<fieldset>"
     for item in element["options"]:
@@ -100,11 +128,13 @@ def generate_radio(element):
             "radio",
             ["name", "id"],
             [element["name"], item["value"]]
-            )
+        )
+
         output += __generate_label(item["label"])
         output += __generate_break()
 
     output += "</fieldset>"
     return output
 
-generate_form("text.json")
+
+#generate_form("text.json")

@@ -5,18 +5,24 @@
         {
             "supertype":"text",
             "type":"text",
-            "name":"firstname",
-            "id":"firstname",
-            "placeholder":"John",
-            "label":"First Name:"
+            "label":"First Name:",
+            "attributes":
+            {
+                "name":"firstname",
+                "id":"firstname",
+                "placeholder":"John"
+            }
         },
         {
             "supertype":"text",
             "type":"text",
-            "name":"lastname",
-            "id":"lastname",
-            "placeholder":"Smith",
-            "label":"Last Name:"
+            "label":"Last Name:",
+            "attributes":
+            {
+                "name":"lastname",
+                "id":"lastname",
+                "placeholder":"Smith"
+            }
         },
         {
             "supertype":"choice",
@@ -41,42 +47,55 @@
         {
             "supertype":"text",
             "type":"text",
-            "name":"username",
-            "id":"username",
-            "placeholder": "Username",
-            "label": "Username:"
+            "label": "Username:",
+            "attributes":
+            {
+                "name":"username",
+                "id":"username",
+                "placeholder": "Username"
+            }
         },
         {
             "supertype":"text",
             "type":"password",
-            "name":"pwrd",
-            "id":"pwrd",
-            "placeholder": "Password",
-            "label": "Password:"
+            "label": "Password:",
+            "attributes":
+            {
+                "name":"pwrd",
+                "id":"pwrd",
+                "placeholder": "Password"
+            }
         },
         {
             "supertype":"text",
             "type":"email",
-            "name":"email",
-            "id":"email",
-            "placeholder": "Eamil",
-            "label": "Email:"
+            "label": "Email:",
+            "attributes":
+            {
+                "name":"email",
+                "id":"email",
+                "placeholder": "Eamil"
+            }
         },
         {
             "supertype":"text",
             "type":"date",
-            "name":"date",
-            "id":"date",
-            "placeholder": "",
-            "label": "Date:"
+            "label": "Date:",
+            "attributes":
+            {
+                "name":"date",
+                "id":"date"
+            }
         },
         {
             "supertype":"text",
             "type":"datetime-local",
-            "name":"datetime",
-            "id":"datetime",
-            "placeholder": "",
-            "label": "DateTime:"
+            "label": "DateTime:",
+            "attributes":
+            {
+                "name":"datetime",
+                "id":"datetime"
+            }
         }
     ]
 }

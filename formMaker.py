@@ -73,22 +73,21 @@ def generate_HTML(element):
 
 def generate_text_type(element):
     output = __generate_label(element["label"])
+    attributes = element["attributes"]
+    keys = list()
+    for key in attributes.keys():
+        keys.append(key)
+    
+    values = list()
+    for key in keys:
+        values.append(attributes[key])
+    
     output += __generate_input_type(
         element["type"],
-        ["name","id","placeholder"],
-        [element["name"], element["id"], element["placeholder"]]
+        keys,
+        values
         )
-    output += __generate_break()
-
-    return output
-
-def generate_password(element):
-    output = __generate_label(element["label"])
-    output += __generate_input_type(
-        "password",
-        ["name", "id", "placeholder"],
-        [element["name"], element["id"], element["placeholder"]]
-        )
+    
     output += __generate_break()
 
     return output
@@ -107,17 +106,5 @@ def generate_radio(element):
 
     output += "</fieldset>"
     return output
-
-def generate_text_area(element):
-    """
-
-    """
-    pass
-
-def generate_option(element):
-    """
-
-    """
-    pass
 
 generate_form("text.json")

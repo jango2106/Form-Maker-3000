@@ -5,37 +5,6 @@
 import json
 
 
-def generate_form(file_name):
-    """The main function for the formMaker program
-
-    file_name: string: the name of the json file to be imported
-    """
-    f_json = __load_file(file_name)
-
-    output = ""
-    output += "<html>\n<body>\n<h1>Autogen Form</h1>\n"
-
-    if(f_json["address"] is not str() and f_json["method"] is not str()):
-        output += '<form action="' + f_json["address"] + '" method="' + f_json["method"] + '">\n'
-    else:
-        output += "<form>"
-    output += "<fieldset>"
-    if f_json["items"] is not list():
-        for element in f_json["items"]:
-            output += generate_html(element)
-
-    output += "</fieldset>"
-    output += '<input type="submit" value="Submit">\n'
-    output += "</form>\n</body>\n</html>"
-
-    print(":::Output:::")
-    print(output)
-
-    file = open("formHtml.html", 'w')
-    file.write(output)
-    file.close()
-
-
 def __load_file(file_name):
     """Loads a json file
 
@@ -82,14 +51,17 @@ def generate_html(element):
     """Generates html based on type
 
     """
-    type_of = element["supertype"]
+    try:
+        type_of = element["supertype"]
+    except KeyError:
+        return '<h3 style="color:red";>Supertype keywork missing in Json</h3>'
 
     if type_of == "text":
         return generate_text_type(element)
     if type_of == "choice":
-        return generate_radio(element)
+        return generate_choice(element)
 
-    return ""
+    return '<h3 style="color:red;">Invalid supertype ' + element["supertype"] + "</h3>"
 
 
 def generate_text_type(element):
@@ -117,7 +89,7 @@ def generate_text_type(element):
     return output
 
 
-def generate_radio(element):
+def generate_choice(element):
     """Generates radio button inputs
 
     """
@@ -125,7 +97,7 @@ def generate_radio(element):
     output += "<fieldset>"
     for item in element["options"]:
         output += __generate_input_type(
-            "radio",
+            element["type"],
             ["name", "id"],
             [element["name"], item["value"]]
         )
@@ -137,4 +109,35 @@ def generate_radio(element):
     return output
 
 
-#generate_form("text.json")
+def generate_form(file_name):
+    """The main function for the formMaker program
+
+    file_name: string: the name of the json file to be imported
+    """
+    f_json = __load_file(file_name)
+
+    output = ""
+    output += "<html>\n<body>\n<h1>Autogen Form</h1>\n"
+
+    if(f_json["address"] is not str() and f_json["method"] is not str()):
+        output += '<form action="' + f_json["address"] + '" method="' + f_json["method"] + '">\n'
+    else:
+        output += "<form>"
+    output += "<fieldset>"
+    if f_json["items"] is not list():
+        for element in f_json["items"]:
+            output += generate_html(element)
+
+    output += "</fieldset>"
+    output += '<input type="submit" value="Submit">\n'
+    output += "</form>\n</body>\n</html>"
+
+    print(":::Output:::")
+    print(output)
+
+    file = open("formHtml.html", 'w')
+    file.write(output)
+    file.close()
+
+
+generate_form("text.json")

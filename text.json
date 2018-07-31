@@ -25,26 +25,6 @@
             }
         },
         {
-            "supertype":"choice",
-            "type":"radio",
-            "label": "Gender:",
-            "name":"gender",
-            "options":[
-                {
-                    "value": "male",
-                    "label": "Male"
-                },
-                {
-                    "value": "female",
-                    "label": "Female"  
-                },
-                {
-                    "value": "other",
-                    "label": "Other"
-                }
-            ]
-        },
-        {
             "supertype":"text",
             "type":"text",
             "label": "Username:",
@@ -96,6 +76,140 @@
                 "name":"datetime",
                 "id":"datetime"
             }
+        },
+        {
+            "supertype":"choice",
+            "type":"radio",
+            "label": "Gender:",
+            "name":"gender",
+            "options":[
+                {
+                    "value": "male",
+                    "label": "Male"
+                },
+                {
+                    "value": "female",
+                    "label": "Female"  
+                },
+                {
+                    "value": "other",
+                    "label": "Other"
+                }
+            ]
+        },
+        {
+            "supertype":"choice",
+            "type":"checkbox",
+            "label": "Vehicles:",
+            "name":"vehcile",
+            "options":[
+                {
+                    "value": "car",
+                    "label": "Car"
+                },
+                {
+                    "value": "truck",
+                    "label": "Truck"  
+                },
+                {
+                    "value": "van",
+                    "label": "Van"
+                }
+            ]
+        },
+        {
+            "supertype": "text",
+            "type":"url",
+            "label": "URL:",
+            "attributes":
+            {
+                "name":"url",
+                "id": "url"
+            }
+        },
+        {
+            "supertype": "text",
+            "type":"number",
+            "label": "Age:",
+            "attributes":
+            {
+                "name":"age",
+                "id": "age",
+                "min": "1",
+                "max": "99"
+            } 
+        },
+        {
+            "supertype": "text",
+            "type":"tel",
+            "label": "Telephone:",
+            "attributes":
+            {
+                "name":"tele",
+                "id": "tele"
+            } 
+        },
+        {
+            "supertype": "text",
+            "type":"file",
+            "label": "File:",
+            "attributes":
+            {
+                "name":"file",
+                "id": "file"
+            } 
+        },
+        {
+            "supertype": "text",
+            "type":"range",
+            "label": "Range:",
+            "attributes":
+            {
+                "name":"range",
+                "id": "range",
+                "min":"0",
+                "max":"99"
+            } 
+        },
+        {
+            "supertype": "text",
+            "type":"color",
+            "label": "Color:",
+            "attributes":
+            {
+                "name":"color",
+                "id": "color",
+                "value":"#ff0000"
+            } 
+        },
+        {
+            "supertype": "text",
+            "type":"search",
+            "label": "Search:",
+            "attributes":
+            {
+                "name":"age",
+                "id": "age",
+                "q":"googlesearch"
+            } 
+        },
+        {
+            "supertype": "text",
+            "type":"button",
+            "label": "Button:",
+            "attributes":
+            {
+                "name":"button1",
+                "id": "button1",
+                "value":"Click Me",
+                "onClick":""
+            } 
+        },
+        {
+            "type":"steve"
+        },
+        {
+            "supertype":"steve"
         }
     ]
 }

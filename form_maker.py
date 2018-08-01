@@ -7,14 +7,50 @@
 import json
 
 
+def __handle_error_and_exit(message, error):
+    """Prints out errors and custom message when and error occurs. Exits the program
+
+    @param message: string - a message to display to the user.
+    @param error: Error - the error created
+    """
+
+    print(message)
+    print("Error Occured: {}".format(error))
+    exit(1)
+
 def __load_file(file_name):
     """Loads a json file
 
     @param file_name: string - the name of the json file
     @return: dict - a json loaded into python dict
     """
-    read_in = open(file_name, 'r')
-    return json.load(read_in)
+    try:
+        read_in = open(file_name, 'r')
+        jobj = json.load(read_in)
+        read_in.close()
+    except IOError as error:
+        message = "Unable to open {}.\n".format(file_name)
+        message += "Make sure that {} exists in ".format(file_name) +\
+                    "the current working directory."
+        __handle_error_and_exit(message, error)
+
+    return jobj
+
+def __save_file(output, file_name):
+    """Saves output to given file
+    
+    @param output: string - the html to be saved to file
+    @param file_name: string - the name of the html file to be created (no extention)
+    """
+    try:
+        file = open("{}.html".format(file_name), 'w')
+        file.write(output)
+        file.close()
+    except IOError as error:
+        message = "Unable to create {}\n.".format(file_name)
+        message += "Make sure you have write permissions in " +\
+                    "the current working directory."
+        __handle_error_and_exit(message, error)
 
 
 def __generate_label(text):
@@ -34,7 +70,7 @@ def __generate_input_type(type_of, attr_list, attr_vals):
     @param attr_vals: list - all of the values of the attribues to add to input tag
     @return output: string - generated input tag
     """
-    output = '<input type="' + type_of + '"'
+    output = '<input type="{}"'.format(type_of)
     for i in range(len(attr_list)):
         output += __generate_input_attr(attr_list[i], attr_vals[i])
 
@@ -50,7 +86,7 @@ def __generate_input_attr(name, value):
     @param value: string - the value associated with an html input tag attribute
     @return: string - an html tag attribute and value
     """
-    return name + '="' + value + '" '
+    return '{}="{}"'.format(name,value)
 
 
 def __generate_break():
@@ -74,7 +110,7 @@ def generate_html(element):
     if type_of == "choice":
         return generate_choice(element)
 
-    return '<h3 style="color:red;">Invalid supertype ' + element["supertype"] + "</h3>"
+    return '<h3 style="color:red;">Invalid supertype {}!</h3>'.format(element["supertype"])
 
 
 def generate_simple_type(element):
@@ -133,11 +169,12 @@ def generate_form(file_name):
     """
     f_json = __load_file(file_name)
 
-    output = ""
-    output += "<html>\n<body>\n<h1>Autogen Form</h1>\n"
+    output = "<html>\n<body>\n<h1>Autogen Form</h1>\n"
 
     if(f_json["address"] is not str() and f_json["method"] is not str()):
-        output += '<form action="' + f_json["address"] + '" method="' + f_json["method"] + '">\n'
+        output += '<form action="{}" method="{}">\n'.format(f_json["address"],
+                                                            f_json["method"])
+
     else:
         output += "<form>"
     output += "<fieldset>"
@@ -149,12 +186,6 @@ def generate_form(file_name):
     output += '<input type="submit" value="Submit">\n'
     output += "</form>\n</body>\n</html>"
 
-    print(":::Output:::")
-    print(output)
-
-    file = open("formHtml.html", 'w')
-    file.write(output)
-    file.close()
-
+    __save_file(output, "auto_form")
 
 generate_form("text.json")
